@@ -5,24 +5,35 @@
   <title>Valentínka 💘</title>
 
   <style>
-    body {
-      height: 100vh;
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
       margin: 0;
+      overflow: hidden; 
+      font-family: Arial, sans-serif;
+    }
+
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
-      background-image: url('https://www.foreigntongues.co.uk/wp-content/uploads/2020/02/Valentines-Day.jpg');
+      background-image: url('https://inntowncampground.com/wp-content/uploads/2019/02/InnTownValentineJanuary232019-16.jpg');
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat; 
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.85);
-      padding: 40px 50px;
-      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 40px 60px;
+      border-radius: 25px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      max-width: 90%;
     }
 
     h1 {
@@ -31,30 +42,31 @@
 
     .buttons {
       position: relative;
+      width: 260px;
       height: 60px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      margin: 0 auto;
     }
 
     button {
       font-size: 18px;
       padding: 10px 22px;
-      border-radius: 10px;
+      border-radius: 12px;
       border: none;
       cursor: pointer;
+      position: absolute;
+      top: 0;
+      transition: 0.15s;
     }
 
     #yes {
+      left: 0;
       background-color: #ff4d6d;
       color: white;
-      margin-right: 120px;
     }
 
     #no {
-      background-color: #ccc;
-      position: absolute;
-      left: 120px;
+      right: 0;
+      background-color: #ddd;
     }
   </style>
 </head>
@@ -64,7 +76,7 @@
   <div class="card" id="card">
     <h1>Budeš môj Valentín? 💕</h1>
 
-    <div class="buttons">
+    <div class="buttons" id="buttons">
       <button id="yes">Áno 💖</button>
       <button id="no">Nie 😅</button>
     </div>
@@ -72,12 +84,13 @@
 
   <script>
     const noButton = document.getElementById("no");
+    const buttons = document.getElementById("buttons");
     const yesButton = document.getElementById("yes");
     const card = document.getElementById("card");
 
-    noButton.addEventListener("mouseover", () => {
-      const maxX = window.innerWidth - noButton.offsetWidth;
-      const maxY = window.innerHeight - noButton.offsetHeight;
+    noButton.addEventListener("mouseenter", () => {
+      const maxX = buttons.clientWidth - noButton.offsetWidth;
+      const maxY = buttons.clientHeight - noButton.offsetHeight;
 
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
@@ -90,6 +103,7 @@
       card.innerHTML = `
         <h1>JUCHÚÚÚ! 🥰💘</h1>
         <p>Vedela som to ❤️</p>
+        <p>Milujem Ťa! ❤️</p>
       `;
     });
   </script>
