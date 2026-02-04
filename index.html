@@ -3,16 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <title>Valentínka 💘</title>
+
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
-      width: 100%;
       height: 100%;
       margin: 0;
-      overflow: hidden;
+      overflow: hidden; /* bez scrollu */
       font-family: Arial, sans-serif;
     }
 
@@ -20,29 +18,37 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-image: url('https://inntowncampground.com/wp-content/uploads/2019/02/InnTownValentineJanuary232019-16.jpg');
+      background-image: url('https://www.foreigntongues.co.uk/wp-content/uploads/2020/02/Valentines-Day.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
     }
 
     .card {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 40px 60px;
+      border-radius: 25px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      max-width: 90%;
     }
 
-    h1 {
-      margin-bottom: 30px;
+    h1 { margin-bottom: 26px; }
+
+    /* ✅ tu sa centrujú OBE tlačidlá */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      height: 60px;
     }
 
     button {
       font-size: 18px;
-      padding: 10px 20px;
-      margin: 10px;
-      border-radius: 10px;
+      padding: 10px 22px;
+      border-radius: 12px;
       border: none;
       cursor: pointer;
     }
@@ -52,18 +58,22 @@
       color: white;
     }
 
+    /* ✅ na začiatku normálne vo flexe */
     #no {
-      background-color: #ccc;
-      position: absolute;
+      background-color: #ddd;
+      position: relative;
     }
   </style>
 </head>
-<body>
 
+<body>
   <div class="card" id="card">
     <h1>Budeš môj Valentín? 💕</h1>
-    <button id="yes">Áno 💖</button>
-    <button id="no">Nie 😅</button>
+
+    <div class="buttons">
+      <button id="yes">Áno 💖</button>
+      <button id="no">Nie 😅</button>
+    </div>
   </div>
 
   <script>
@@ -71,17 +81,32 @@
     const yesButton = document.getElementById("yes");
     const card = document.getElementById("card");
 
-    noButton.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
-      const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+    function moveNoButton() {
+      // ✅ keď má utekať, dáme ho "nad všetko"
+      noButton.style.position = "fixed";
+      noButton.style.zIndex = "9999";
+
+      // ✅ náhodná pozícia, ale vždy v rámci okna (bez scrollu)
+      const padding = 10;
+      const maxX = window.innerWidth - noButton.offsetWidth - padding;
+      const maxY = window.innerHeight - noButton.offsetHeight - padding;
+
+      const x = Math.random() * maxX + padding;
+      const y = Math.random() * maxY + padding;
+
       noButton.style.left = x + "px";
       noButton.style.top = y + "px";
-    });
+    }
+
+    // uteká keď sa k nemu priblížiš
+    noButton.addEventListener("mouseenter", moveNoButton);
 
     yesButton.addEventListener("click", () => {
-      card.innerHTML = "<h1>JUCHÚÚÚ! 🥰💘</h1><p>Milujem ťa ❤️</p>";
+      card.innerHTML = `
+        <h1>JUCHÚÚÚ! 🥰💘</h1>
+        <p>Vedela som to ❤️</p>
+      `;
     });
   </script>
-
 </body>
 </html>
